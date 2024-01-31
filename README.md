@@ -1,1 +1,3 @@
 # myFridge
+
+Első lépések
