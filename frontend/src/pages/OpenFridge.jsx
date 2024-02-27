@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import '../design/OpenFridgeStyle.css';
+import Button from 'react-bootstrap/Button';
 
 const OpenFridge = () => {
     const [fridgeItems, setFridgeItems] = useState([]);
@@ -76,66 +78,90 @@ const OpenFridge = () => {
 
     const filteredFridgeItems = fridgeItems.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    return (<div>
-        <h2>Fridge Management</h2>
+    return (
+        <div className="centered-card">
+            <h2 className="text-white">Fridge Management</h2>
 
-        <div className="search-bar">
-            <input
-                type="text"
-                placeholder="Search Item"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
-        </div>
+            <div className="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search Item"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="form-control"
+                />
+            </div>
 
-        <div className="item-list">
-            <ul>
-                {filteredFridgeItems.map((item) => (<li key={item.id}>
-                    {item.name} - Quantity: {item.quantity}
-                    <div className="action-buttons">
-                        <button onClick={() => handleUpdateItem(item.id)}>
-                            Update Item
-                        </button>
-                        <button onClick={() => handleDeleteItem(item.id)}>
-                            Delete
-                        </button>
-                    </div>
-                    {showUpdateField && selectedItemId === item.id && (<>
-                        <input
-                            type="text"
-                            placeholder="New Name"
-                            value={updatedItemName}
-                            onChange={(e) => setUpdatedItemName(e.target.value)}
-                        />
-                        <input
-                            type="number"
-                            placeholder="New Quantity"
-                            value={newItemQuantity}
-                            onChange={(e) => setNewItemQuantity(e.target.value)}
-                        />
-                        <button onClick={handleConfirmUpdate}>OK</button>
-                        <button onClick={handleCancelUpdate}>Cancel</button>
-                    </>)}
-                </li>))}
-            </ul>
-        </div>
-        <div className="add-item">
-            <h3>Add New Item</h3>
-            <input
-                type="text"
-                placeholder="Item Name"
-                value={newItemName}
-                onChange={(e) => setNewItemName(e.target.value)}
-            />
-            <input
-                type="number"
-                placeholder="Quantity"
-                value={newItemQuantity}
-                onChange={(e) => setNewItemQuantity(e.target.value)}
-            />
-            <button onClick={handleAddItem}>Add Item</button>
-        </div>
-    </div>);
+            <div className="item-list">
+                <ul>
+                    {filteredFridgeItems.map((item) => (<li key={item.id}>
+                        {item.name} - Quantity: {item.quantity}
+                        <div className="action-buttons">
+                            <Button
+                                variant="outline-info"
+                                onClick={() => handleUpdateItem(item.id)}
+                            >
+                                Update Item
+                            </Button>
+                            <Button
+                                variant="outline-danger"
+                                onClick={() => handleDeleteItem(item.id)}
+                            >
+                                Delete
+                            </Button>
+                        </div>
+                        {showUpdateField && selectedItemId === item.id && (<>
+                            <input
+                                type="text"
+                                placeholder="New Name"
+                                value={updatedItemName}
+                                onChange={(e) => setUpdatedItemName(e.target.value)}
+                                className="form-control"
+                            />
+                            <input
+                                type="number"
+                                placeholder="New Quantity"
+                                value={newItemQuantity}
+                                onChange={(e) => setNewItemQuantity(e.target.value)}
+                                className="form-control"
+                            />
+                            <Button
+                                variant="outline-success"
+                                onClick={handleConfirmUpdate}
+                            >
+                                OK
+                            </Button>
+                            <Button
+                                variant="outline-secondary"
+                                onClick={handleCancelUpdate}
+                            >
+                                Cancel
+                            </Button>
+                        </>)}
+                    </li>))}
+                </ul>
+            </div>
+            <div className="add-item">
+                <h3 className="text-white">Add New Item</h3>
+                <input
+                    type="text"
+                    placeholder="Item Name"
+                    value={newItemName}
+                    onChange={(e) => setNewItemName(e.target.value)}
+                    className="form-control"
+                />
+                <input
+                    type="number"
+                    placeholder="Quantity"
+                    value={newItemQuantity}
+                    onChange={(e) => setNewItemQuantity(e.target.value)}
+                    className="form-control"
+                />
+                <Button variant="outline-info" onClick={handleAddItem}>
+                    Add Item
+                </Button>
+            </div>
+        </div>);
 };
 
 export default OpenFridge;
