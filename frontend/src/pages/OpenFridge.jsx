@@ -79,6 +79,7 @@ const OpenFridge = () => {
     const filteredFridgeItems = fridgeItems.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
+        <div className="centered-card-container">
         <div className="centered-card">
             <h2 className="text-white">Fridge Management</h2>
 
@@ -161,6 +162,7 @@ const OpenFridge = () => {
                     Add Item
                 </Button>
             </div>
+        </div>
         </div>);
 };
 
