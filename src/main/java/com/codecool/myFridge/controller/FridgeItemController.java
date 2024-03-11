@@ -48,4 +48,9 @@ public class FridgeItemController {
         return service.deleteFridgeItem(id);
     }
 
+    @GetMapping("api/allFridgeItems")
+    public List<FridgeItem> getAllFridgeItems() {
+        return service.getAllFridgeItems();
+    }
+
 }

@@ -48,4 +48,7 @@ public class FridgeItemService {
             throw new RuntimeException("Item not found with id: " + fridgeItem.getId());
         }
     }
+    public List<FridgeItem> getAllFridgeItems() {
+        return repository.findAll();
+    }
 }
