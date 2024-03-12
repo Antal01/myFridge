@@ -1,7 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../design/OpenFridgeStyle.css';
-import Button from 'react-bootstrap/Button';
+import {
+    Button,
+    Card,
+    Col,
+    Container,
+    Form,
+    FormControl,
+    InputGroup,
+    Row,
+} from 'react-bootstrap';
 
 const OpenFridge = () => {
     const [fridgeItems, setFridgeItems] = useState([]);
@@ -26,11 +34,12 @@ const OpenFridge = () => {
     const handleAddItem = () => {
         axios
             .post('http://localhost:8080/api/addFridgeItem', {
-                name: newItemName, quantity: newItemQuantity,
+                name: newItemName,
+                quantity: newItemQuantity,
             })
             .then((response) => {
                 setNewItemName('');
-                setNewItemQuantity(1); // Reset quantity to 1 after adding the item
+                setNewItemQuantity(1);
                 fetchAllFridgeItems();
             })
             .catch((error) => console.error('Error adding fridge item', error));
@@ -55,8 +64,8 @@ const OpenFridge = () => {
                 .put('http://localhost:8080/api/update', updatedItem)
                 .then((response) => {
                     setUpdatedItemName('');
-                    setNewItemQuantity(1); // Reset quantity to 1 after updating the item
-                    setShowUpdateField(false); // Hide the update field after confirmation
+                    setNewItemQuantity(1);
+                    setShowUpdateField(false);
                     fetchAllFridgeItems();
                 })
                 .catch((error) => console.error('Error updating fridge item', error));
@@ -66,7 +75,7 @@ const OpenFridge = () => {
     };
 
     const handleCancelUpdate = () => {
-        setShowUpdateField(false); // Hide the update field on cancel
+        setShowUpdateField(false);
     };
 
     const handleDeleteItem = (id) => {
@@ -76,94 +85,100 @@ const OpenFridge = () => {
             .catch((error) => console.error('Error deleting fridge item', error));
     };
 
-    const filteredFridgeItems = fridgeItems.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredFridgeItems = fridgeItems.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
-        <div className="centered-card-container">
-        <div className="centered-card">
-            <h2 className="text-white">Fridge Management</h2>
+        <Container className="p-3 mt-5" style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
+            <h2 className="text-center mb-4" style={{ color: '#007bff' }}>
+                Fridge Management
+            </h2>
 
-            <div className="search-bar">
-                <input
+            <InputGroup className="mb-3">
+                <FormControl
                     type="text"
                     placeholder="Search Item"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="form-control"
                 />
-            </div>
+            </InputGroup>
 
-            <div className="item-list">
-                <ul>
-                    {filteredFridgeItems.map((item) => (<li key={item.id}>
-                        {item.name} - Quantity: {item.quantity}
-                        <div className="action-buttons">
-                            <Button
-                                variant="outline-info"
-                                onClick={() => handleUpdateItem(item.id)}
-                            >
-                                Update Item
-                            </Button>
-                            <Button
-                                variant="outline-danger"
-                                onClick={() => handleDeleteItem(item.id)}
-                            >
-                                Delete
-                            </Button>
-                        </div>
-                        {showUpdateField && selectedItemId === item.id && (<>
-                            <input
-                                type="text"
-                                placeholder="New Name"
-                                value={updatedItemName}
-                                onChange={(e) => setUpdatedItemName(e.target.value)}
-                                className="form-control"
-                            />
-                            <input
-                                type="number"
-                                placeholder="New Quantity"
-                                value={newItemQuantity}
-                                onChange={(e) => setNewItemQuantity(e.target.value)}
-                                className="form-control"
-                            />
-                            <Button
-                                variant="outline-success"
-                                onClick={handleConfirmUpdate}
-                            >
-                                OK
-                            </Button>
-                            <Button
-                                variant="outline-secondary"
-                                onClick={handleCancelUpdate}
-                            >
-                                Cancel
-                            </Button>
-                        </>)}
-                    </li>))}
-                </ul>
-            </div>
-            <div className="add-item">
-                <h3 className="text-white">Add New Item</h3>
-                <input
-                    type="text"
-                    placeholder="Item Name"
-                    value={newItemName}
-                    onChange={(e) => setNewItemName(e.target.value)}
-                    className="form-control"
-                />
-                <input
-                    type="number"
-                    placeholder="Quantity"
-                    value={newItemQuantity}
-                    onChange={(e) => setNewItemQuantity(e.target.value)}
-                    className="form-control"
-                />
-                <Button variant="outline-info" onClick={handleAddItem}>
+            <Row xs={1} md={2} lg={3} className="g-4">
+                {filteredFridgeItems.map((item) => (
+                    <Col key={item.id} className="mb-3">
+                        <Card>
+                            <Card.Body>
+                                <h5 style={{ color: '#343a40' }}>{item.name}</h5>
+                                <p style={{ color: '#6c757d' }}>Quantity: {item.quantity}</p>
+                                <div className="d-flex justify-content-between">
+                                    <Button variant="info" onClick={() => handleUpdateItem(item.id)}>
+                                        Update Item
+                                    </Button>
+                                    <Button variant="danger" onClick={() => handleDeleteItem(item.id)}>
+                                        Delete
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                        {showUpdateField && selectedItemId === item.id && (
+                            <Card className="mt-2">
+                                <Card.Body>
+                                    <Form.Group className="mb-3">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="New Name"
+                                            value={updatedItemName}
+                                            onChange={(e) => setUpdatedItemName(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Control
+                                            type="number"
+                                            placeholder="New Quantity"
+                                            value={newItemQuantity}
+                                            onChange={(e) => setNewItemQuantity(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <div className="d-flex justify-content-end">
+                                        <Button variant="success" onClick={handleConfirmUpdate}>
+                                            OK
+                                        </Button>
+                                        <Button variant="secondary" className="ms-2" onClick={handleCancelUpdate}>
+                                            Cancel
+                                        </Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        )}
+                    </Col>
+                ))}
+            </Row>
+
+            <div className="mt-4">
+                <h3 style={{ color: '#007bff' }}>Add New Item</h3>
+                <InputGroup className="mb-3">
+                    <FormControl
+                        type="text"
+                        placeholder="Item Name"
+                        value={newItemName}
+                        onChange={(e) => setNewItemName(e.target.value)}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <FormControl
+                        type="number"
+                        placeholder="Quantity"
+                        value={newItemQuantity}
+                        onChange={(e) => setNewItemQuantity(e.target.value)}
+                    />
+                </InputGroup>
+                <Button variant="info" onClick={handleAddItem}>
                     Add Item
                 </Button>
             </div>
-        </div>
-        </div>);
+        </Container>
+    );
 };
 
 export default OpenFridge;
