@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Container, Row, Col, InputGroup, FormControl, Button, Card } from 'react-bootstrap';
+import {Container, Row, Col, InputGroup, FormControl, Button, Card} from 'react-bootstrap';
 
 const Recipes = () => {
     const [ingredients, setIngredients] = useState('');
@@ -115,12 +115,12 @@ const Recipes = () => {
                 {sortedRecipes.map((recipe) => (
                     <Col key={recipe.id} md={4} className="mb-4">
                         <Card>
-                            <Card.Img variant="top" src={recipe.image} alt={recipe.title} />
+                            <Card.Img variant="top" src={recipe.image} alt={recipe.title}/>
                             <Card.Body>
                                 <Card.Title>{recipe.title}</Card.Title>
                                 <Card.Text>
-                                    Used Ingredient Count: {recipe.usedIngredientCount} <br />
-                                    Missed Ingredient Count: {recipe.missedIngredientCount} <br />
+                                    Used Ingredient Count: {recipe.usedIngredientCount} <br/>
+                                    Missed Ingredient Count: {recipe.missedIngredientCount} <br/>
                                     Likes: {recipe.likes}
                                 </Card.Text>
                             </Card.Body>
