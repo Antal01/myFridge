@@ -1,8 +1,8 @@
 import React from "react";
 import Carousel from 'react-bootstrap/Carousel';
-import img1 from '../images/img1.jpg';
-import img2 from '../images/img2.jpg';
-import img3 from '../images/img3.jpg';
+import img4 from '../images/img4.jpg';
+import img5 from '../images/img5.jpg';
+import img6 from '../images/img6.jpg';
 import '../design/HomePageStyle.css';
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
                     <img
                         style={{objectFit: 'cover', width: '100%', maxHeight: '100vh'}}
                         className="d-block w-100"
-                        src={img1}
+                        src={img4}
                         alt="First slide"
                     />
                     <Carousel.Caption style={{color: 'black', textShadow: '1px 1px 2px white'}}>
@@ -24,7 +24,7 @@ const Home = () => {
                     <img
                         style={{objectFit: 'cover', width: '100%', maxHeight: '100vh'}}
                         className="d-block w-100"
-                        src={img2}
+                        src={img5}
                         alt="Second slide"
                     />
                     <Carousel.Caption style={{color: 'black', textShadow: '1px 1px 2px white'}}>
@@ -36,7 +36,7 @@ const Home = () => {
                     <img
                         style={{objectFit: 'cover', width: '100%', maxHeight: '100vh'}}
                         className="d-block w-100"
-                        src={img3}
+                        src={img6}
                         alt="Third slide"
                     />
                     <Carousel.Caption style={{color: 'black', textShadow: '1px 1px 2px white'}}>
