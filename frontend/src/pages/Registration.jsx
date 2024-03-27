@@ -8,30 +8,36 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-
+import axios from 'axios';
 function Registration() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [token, setToken] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
-    const [advantageIndex, setAdvantageIndex] = useState(0);
-
     const navigate = useNavigate();
 
-    const handleRegistration = (e) => {
+    const handleRegistration = async (e) => {
         e.preventDefault();
+
         if (password === passwordConfirm) {
-            const data = {
-                name: username,
-                email: email,
-                password: password,
-            };
-            setToken('dummyToken');
-            localStorage.setItem('token', 'dummyToken');
-            localStorage.setItem('username', username);
-            navigate('/');
+            try {
+                const response = await axios.post('api/register', {
+                    userName: username,
+                    email: email,
+                    password: password,
+                }, {
+                    mode: 'no-cors',
+                });
+                console.log(response.data);
+                navigate('/');
+            }  catch (error) {
+                if (error.response && error.response.data) {
+                    setErrorMessage(error.response.data.message);
+                } else {
+                    setErrorMessage('An error occurred while registering.');
+                }
+            }
         } else {
             setErrorMessage('Passwords do not match. Please make sure the passwords match.');
         }
@@ -72,13 +78,13 @@ function Registration() {
                         <Button variant="primary" type="submit" className="mt-3">
                             Register
                         </Button>
-                        <p className="mt-3 text-center">
-                            Already have an account?{' '}
-                            <Link to={`/registration`} style={{color: '#007BFF', textDecoration: 'none'}}>
-                                Log In
-                            </Link>
-                        </p>
                     </Form>
+                    <p className="mt-3 text-center">
+                        Already have an account?{' '}
+                        <Link to={`/login`} style={{color: '#007BFF', textDecoration: 'none'}}>
+                            Log In
+                        </Link>
+                    </p>
                 </Col>
             </Row>
         </Container>

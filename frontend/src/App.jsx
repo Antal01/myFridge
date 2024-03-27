@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Home from "./pages/Home.jsx";
 import {Route, Routes} from "react-router-dom";
 import Layout from "./components/Layout.jsx";
@@ -7,6 +6,8 @@ import Recipes from "./pages/Recipes.jsx";
 import Header from "./components/Header.jsx";
 import Registration from "./pages/Registration.jsx";
 import Login from "./pages/Login.jsx";
+import React from 'react';
+
 
 function App() {
  return(

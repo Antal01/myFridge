@@ -41,8 +41,8 @@ public class FridgeItemService {
         FridgeItem existingItem = repository.findById(fridgeItem.getId()).orElse(null);
 
         if (existingItem != null) {
-            existingItem.setName(fridgeItem.getName());  // Update the name
-            existingItem.setQuantity(fridgeItem.getQuantity());  // Update the quantity
+            existingItem.setName(fridgeItem.getName());
+            existingItem.setQuantity(fridgeItem.getQuantity());
             return repository.save(existingItem);
         } else {
             throw new RuntimeException("Item not found with id: " + fridgeItem.getId());
