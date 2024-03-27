@@ -1,24 +1,29 @@
 package com.codecool.myFridge.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "user_tbl")
-public class User {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "member")
+public class Member {
     @Id
-    @Column(name = "user_id", length = 45)
+    @Column(name = "id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
-    @Column(name = "user_name", length = 255)
-    private String userName;
+    @Column(name = "name", length = 255)
+    private String name;
     @Column(name = "email", length = 255)
     private String email;
     @Column(name = "password", length = 255)
     private String password;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fridge_id", referencedColumnName = "id")
