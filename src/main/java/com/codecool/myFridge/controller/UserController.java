@@ -15,12 +15,17 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("api/register")
-    public User registerUser(@RequestBody User user) {
-        System.out.printf("user name " + user);
-        return userService.createUser(user);
+    public void registerUser(@RequestBody User user) {
+        System.out.println("name"+user.getUserName());
+        System.out.println("password"+user.getPassword());
+        System.out.println("email"+user.getEmail());
+        //System.out.println("userid"+user.getUserId());
+        //System.out.println("fridgeid"+user.getFridge());
+        userService.createUser(user);
     }
     @PostMapping("api/login")
     public User loginUser(@RequestParam String email, @RequestParam String password) {
-        return userService.loginUser(email, password);
+        //return userService.loginUser(email, password);
+        return null;
     }
 }
