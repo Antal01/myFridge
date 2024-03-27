@@ -12,7 +12,7 @@ public class Fridge {
     private Long id;
 
     @OneToOne(mappedBy = "fridge")
-    private User user;
+    private Member user;
 
     @OneToMany(mappedBy = "fridge", cascade = CascadeType.ALL)
     private List<FridgeItem> items;

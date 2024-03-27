@@ -1,6 +1,6 @@
 package com.codecool.myFridge.dao;
 
-import com.codecool.myFridge.model.User;
+import com.codecool.myFridge.model.Member;
 import com.codecool.myFridge.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,12 +17,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void createUser(User user) {
+    public void createUser(Member user) {
         userRepository.save(user);
     }
 
     @Override
-    public User loginUser(String email, String password) {
+    public Member loginUser(String email, String password) {
         return null;
     }
 

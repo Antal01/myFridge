@@ -10,27 +10,44 @@ import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 
 function Login() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const [token, setToken] = useState(null);
 
-    const handleLogin = async (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('/api/login', {
-                email: email,
-                password: password,
+        const data = {
+            name: username,
+            password: password,
+        };
+
+        fetch(`/api/v1/auth/authenticate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Failed to fetch data');
+                }
+            })
+            .then((data) => {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', username);
+                setToken(data.token);
+                setIsLoggedIn(true);
+                navigate('/');
+            })
+            .catch((error) => {
+                alert('Authentication failed. Please check your credentials.');
+                console.error(error);
             });
-            console.log(response.data);
-            navigate('/');
-        } catch (error) {
-            if (error.response && error.response.data) {
-                setErrorMessage(error.response.data.message);
-            } else {
-                setErrorMessage('An error occurred while logging in.');
-            }
-        }
     };
 
     return (
@@ -42,8 +59,8 @@ function Login() {
                     </Alert>
                     <Form onSubmit={handleLogin}>
                         <Form.Group controlId="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                         </Form.Group>
 
                         <Form.Group controlId="password">

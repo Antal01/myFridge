@@ -1,6 +1,7 @@
+/*
 package com.codecool.myFridge.controller;
 
-import com.codecool.myFridge.model.User;
+import com.codecool.myFridge.model.Member;
 import com.codecool.myFridge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +16,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("api/register")
-    public void registerUser(@RequestBody User user) {
-        System.out.println("name"+user.getUserName());
+    public void registerUser(@RequestBody Member user) {
+        System.out.println("name"+user.getName());
         System.out.println("password"+user.getPassword());
         System.out.println("email"+user.getEmail());
         //System.out.println("userid"+user.getUserId());
@@ -24,8 +25,9 @@ public class UserController {
         userService.createUser(user);
     }
     @PostMapping("api/login")
-    public User loginUser(@RequestParam String email, @RequestParam String password) {
+    public Member loginUser(@RequestParam String email, @RequestParam String password) {
         //return userService.loginUser(email, password);
         return null;
     }
 }
+*/

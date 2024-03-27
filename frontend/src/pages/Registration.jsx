@@ -16,30 +16,43 @@ function Registration() {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const [token, setToken] = useState(null);
 
-    const handleRegistration = async (e) => {
+    const handleRegistration = (e) => {
         e.preventDefault();
+        if (password == passwordConfirm) {
+            const data = {
+                name: username, email: email, password: password
+            };
+            fetch(`/api/v1/auth/register`, {
+                method: 'POST', headers: {
+                    'Content-Type': 'application/json',
+                }, body: JSON.stringify(data),
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error('Failed to fetch data');
+                    }
+                })
+                .then((data) => {
+                    if (data.token === "fail") {
+                        setErrorMassage("This UserName is already in use , Please try Another One")
+                    } else {
+                        setToken(data.token); // Set the 'token' here
+                        console.log("token " + data.token); // Use data.token here
 
-        if (password === passwordConfirm) {
-            try {
-                const response = await axios.post('api/register', {
-                    userName: username,
-                    email: email,
-                    password: password,
-                }, {
-                    mode: 'no-cors',
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('username', username);
+                        navigate('/');
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
                 });
-                console.log(response.data);
-                navigate('/');
-            }  catch (error) {
-                if (error.response && error.response.data) {
-                    setErrorMessage(error.response.data.message);
-                } else {
-                    setErrorMessage('An error occurred while registering.');
-                }
-            }
         } else {
-            setErrorMessage('Passwords do not match. Please make sure the passwords match.');
+            alert("Passwords do not match. Please make sure the passwords match.")
         }
     };
 

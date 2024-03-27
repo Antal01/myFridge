@@ -1,8 +1,8 @@
 package com.codecool.myFridge.dao;
 
-import com.codecool.myFridge.model.User;
+import com.codecool.myFridge.model.Member;
 
 public interface UserDao {
-    public void createUser(User user);
-    User loginUser(String email, String password);
+    public void createUser(Member user);
+    Member loginUser(String email, String password);
 }

@@ -1,8 +1,7 @@
 package com.codecool.myFridge.service;
 
 import com.codecool.myFridge.dao.UserDao;
-import com.codecool.myFridge.model.User;
-import com.codecool.myFridge.repository.UserRepository;
+import com.codecool.myFridge.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public void createUser(User user) {
+    public void createUser(Member user) {
         userDao.createUser(user);
     }
 
