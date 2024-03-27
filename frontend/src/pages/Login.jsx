@@ -1,72 +1,70 @@
-import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {useNavigate} from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-import Carousel from 'react-bootstrap/Carousel';
+import axios from 'axios';
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [advantageIndex, setAdvantageIndex] = useState(0);
-
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        const data = {
-            name: username, password: password,
-        };
-        localStorage.setItem('token', 'dummyToken');
-        localStorage.setItem('username', username);
-        setToken('dummyToken');
-        setIsLoggedIn(true);
-        navigate('/mainpage');
+        try {
+            const response = await axios.post('/api/login', {
+                email: email,
+                password: password,
+            });
+            console.log(response.data);
+            navigate('/');
+        } catch (error) {
+            if (error.response && error.response.data) {
+                setErrorMessage(error.response.data.message);
+            } else {
+                setErrorMessage('An error occurred while logging in.');
+            }
+        }
     };
 
-    return (<Container fluid style={{backgroundColor: '#f5f5f5', minHeight: '100vh'}}>
-            <div style={{width: '40%', marginLeft: '50px'}}>
-            </div>
-
-            <div style={{width: '60%', marginLeft: '100px'}}>
-                <Alert variant="danger" show={!isLoggedIn} onClose={() => setIsLoggedIn(true)} dismissible>
-                    Authentication failed. Please check your credentials.
-                </Alert>
-
-                {isLoggedIn ? null : (
-                    <Form onSubmit={handleLogin} style={{maxWidth: '500px', margin: 'auto', marginTop: '50px'}}>
-                        <h2 className="text-center mb-4" style={{color: '#333'}}>
-                            Login
-                        </h2>
-                        <Form.Group controlId="username">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)}
-                                          required/>
+    return (
+        <Container fluid style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+            <Row className="justify-content-center align-items-center">
+                <Col md={4} style={{marginTop: '15vh'}}>
+                    <Alert variant="danger" show={errorMessage !== ''} onClose={() => setErrorMessage('')} dismissible>
+                        {errorMessage}
+                    </Alert>
+                    <Form onSubmit={handleLogin}>
+                        <Form.Group controlId="email">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                         </Form.Group>
 
                         <Form.Group controlId="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                                          required/>
+                            <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                         </Form.Group>
 
-                        <Button type="submit" variant="primary" className="mt-3" style={{backgroundColor: '#007BFF'}}>
-                            Login
+                        <Button variant="primary" type="submit" className="mt-3">
+                            Log In
                         </Button>
-
                         <p className="mt-3 text-center">
                             Don't have an account?{' '}
                             <Link to={`/registration`} style={{color: '#007BFF', textDecoration: 'none'}}>
                                 Register
                             </Link>
                         </p>
-                    </Form>)}
-            </div>
-        </Container>);
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+    );
 }
 
 export default Login;

@@ -1,9 +1,6 @@
 package com.codecool.myFridge.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +17,8 @@ public class FridgeItem {
     private int id;
     private String name;
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "fridge_id", nullable = false)
+    private Fridge fridge;
 }
