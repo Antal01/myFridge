@@ -14,12 +14,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/api/register")
+    @PostMapping("api/register")
     public User registerUser(@RequestBody User user) {
         System.out.printf("user name " + user);
         return userService.createUser(user);
     }
-    @PostMapping("/api/login")
+    @PostMapping("api/login")
     public User loginUser(@RequestParam String email, @RequestParam String password) {
         return userService.loginUser(email, password);
     }

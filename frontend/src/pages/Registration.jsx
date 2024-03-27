@@ -22,12 +22,12 @@ function Registration() {
 
         if (password === passwordConfirm) {
             try {
-                const response = await axios.post('/api/register', {
+                const response = await axios.post('api/register', {
                     userName: username,
                     email: email,
                     password: password,
                 }, {
-                    mode: 'no-cors', // Set mode to 'no-cors'
+                    mode: 'no-cors',
                 });
                 console.log(response.data);
                 navigate('/');
