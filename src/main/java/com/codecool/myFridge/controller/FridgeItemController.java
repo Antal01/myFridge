@@ -12,6 +12,10 @@ public class FridgeItemController {
 
     @Autowired
     private FridgeItemService service;
+    @Autowired
+    public void setFridgeItemService(FridgeItemService service) {
+        this.service = service;
+    }
 
     @PostMapping("api/addFridgeItem")
     public FridgeItem addFridgeItem(@RequestBody FridgeItem item) {
