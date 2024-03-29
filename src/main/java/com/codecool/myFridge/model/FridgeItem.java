@@ -21,4 +21,9 @@ public class FridgeItem {
     @ManyToOne
     @JoinColumn(name = "fridge_id", nullable = false)
     private Fridge fridge;
+
+    public FridgeItem(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 }
