@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Carousel from 'react-bootstrap/Carousel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-import axios from 'axios';
+
 function Registration() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -40,12 +39,12 @@ function Registration() {
                     if (data.token === "fail") {
                         setErrorMassage("This UserName is already in use , Please try Another One")
                     } else {
-                        setToken(data.token); // Set the 'token' here
-                        console.log("token " + data.token); // Use data.token here
+                        setToken(data.token);
+                        console.log("token " + data.token);
 
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('username', username);
-                        navigate('/');
+                        navigate('/login');
                     }
                 })
                 .catch((error) => {
