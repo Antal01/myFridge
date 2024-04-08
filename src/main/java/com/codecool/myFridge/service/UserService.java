@@ -15,8 +15,4 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public void createUser(Member user) {
-        userDao.createUser(user);
-    }
-
 }
