@@ -12,7 +12,12 @@ const Recipes = () => {
     useEffect(() => {
         const fetchFridgeItems = async () => {
             try {
-                const response = await axios.get('/api/allFridgeItems');
+                const token = localStorage.getItem('token');
+                const response = await axios.get('/api/fridgeitems', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setFridgeItems(response.data);
                 const defaultSearchIngredients = response.data.map(item => item.name).join(',');
                 handleSearch(defaultSearchIngredients);

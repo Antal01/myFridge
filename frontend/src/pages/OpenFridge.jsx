@@ -10,6 +10,7 @@ import {
     InputGroup,
     Row,
 } from 'react-bootstrap';
+import {useAuth} from "../components/AuthContext.jsx";
 
 const OpenFridge = () => {
     const [fridgeItems, setFridgeItems] = useState([]);
@@ -19,24 +20,44 @@ const OpenFridge = () => {
     const [showUpdateField, setShowUpdateField] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [newItemQuantity, setNewItemQuantity] = useState(1);
+    const { logout } = useAuth();
 
     useEffect(() => {
         fetchAllFridgeItems();
     }, []);
 
     const fetchAllFridgeItems = () => {
+        const token = localStorage.getItem('token');
         axios
-            .get('http://localhost:8080/api/fridgeitems')
+            .get('/api/fridgeitems', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((response) => setFridgeItems(response.data))
-            .catch((error) => console.error('Error fetching fridge items', error));
+            .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                    logout();
+                }
+                console.error('Error fetching fridge items', error);
+            });
     };
 
     const handleAddItem = () => {
+        const token = localStorage.getItem('token');
         axios
-            .post('http://localhost:8080/api/addFridgeItem', {
-                name: newItemName,
-                quantity: newItemQuantity,
-            })
+            .post(
+                '/api/addFridgeItem',
+                {
+                    name: newItemName,
+                    quantity: newItemQuantity,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
             .then((response) => {
                 setNewItemName('');
                 setNewItemQuantity(1);
@@ -60,8 +81,13 @@ const OpenFridge = () => {
                 quantity: newItemQuantity || selectedItem.quantity,
             };
 
+            const token = localStorage.getItem('token');
             axios
-                .put('http://localhost:8080/api/update', updatedItem)
+                .put('/api/update', updatedItem, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 .then((response) => {
                     setUpdatedItemName('');
                     setNewItemQuantity(1);
@@ -79,8 +105,13 @@ const OpenFridge = () => {
     };
 
     const handleDeleteItem = (id) => {
+        const token = localStorage.getItem('token');
         axios
-            .delete(`http://localhost:8080/api/delete/${id}`)
+            .delete(`/api/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((response) => fetchAllFridgeItems())
             .catch((error) => console.error('Error deleting fridge item', error));
     };

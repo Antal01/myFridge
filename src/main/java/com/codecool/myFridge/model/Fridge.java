@@ -2,6 +2,7 @@ package com.codecool.myFridge.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,4 +17,8 @@ public class Fridge {
 
     @OneToMany(mappedBy = "fridge", cascade = CascadeType.ALL)
     private List<FridgeItem> items;
+
+    public Fridge() {
+        this.items = new ArrayList<>();
+    }
 }
