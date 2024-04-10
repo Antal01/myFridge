@@ -28,5 +28,4 @@ public class Member {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fridge_id")
     private Fridge fridge;
-
 }

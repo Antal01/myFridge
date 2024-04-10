@@ -11,6 +11,7 @@ import {
     Row,
 } from 'react-bootstrap';
 import {useAuth} from "../components/AuthContext.jsx";
+import data from "bootstrap/js/src/dom/data.js";
 
 const OpenFridge = () => {
     const [fridgeItems, setFridgeItems] = useState([]);
@@ -20,11 +21,34 @@ const OpenFridge = () => {
     const [showUpdateField, setShowUpdateField] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [newItemQuantity, setNewItemQuantity] = useState(1);
+    const [member, setMember] = useState(null);
     const { logout } = useAuth();
 
     useEffect(() => {
         fetchAllFridgeItems();
+        fetchMember();
     }, []);
+
+
+    const fetchMember = () => {
+        const token = localStorage.getItem('token');
+        const name = localStorage.getItem('username');
+        console.log(name);
+        axios
+            .get(`/api/member/${name}/fridgeId`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => setMember(response.data))
+            .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                    logout();
+                }
+                console.error('Error fetching fridge items', error);
+            });
+    };
+
 
     const fetchAllFridgeItems = () => {
         const token = localStorage.getItem('token');
@@ -45,12 +69,14 @@ const OpenFridge = () => {
 
     const handleAddItem = () => {
         const token = localStorage.getItem('token');
+        console.log(member)
         axios
             .post(
                 '/api/addFridgeItem',
                 {
                     name: newItemName,
                     quantity: newItemQuantity,
+                    fridge: member.fridge,
                 },
                 {
                     headers: {
