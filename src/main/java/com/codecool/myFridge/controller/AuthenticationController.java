@@ -29,7 +29,7 @@ public class AuthenticationController {
             registerRequest.setEmail("This username is already in use");
             return ResponseEntity.ok(responseEntity);
         } else {
-            System.out.println("else ág");
+            System.out.println("első ág");
             return ResponseEntity.ok(responseEntity);
         }
     }

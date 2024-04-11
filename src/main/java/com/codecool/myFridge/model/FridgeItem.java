@@ -1,29 +1,33 @@
-package com.codecool.myFridge.model;
+    package com.codecool.myFridge.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+    import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+    import com.fasterxml.jackson.annotation.JsonIdentityReference;
+    import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+    import jakarta.persistence.*;
+    import lombok.AllArgsConstructor;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "ITEM_TBL")
-public class FridgeItem {
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    @Table(name = "ITEM")
+    public class FridgeItem {
 
-    @Id
-    @GeneratedValue
-    private int id;
-    private String name;
-    private int quantity;
+        @Id
+        @GeneratedValue
+        private int id;
+        private String name;
+        private int quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "fridge_id", nullable = false)
-    private Fridge fridge;
+        @ManyToOne
+        @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="fridge_id")
+        @JsonIdentityReference(alwaysAsId=true)
+        private Fridge fridge;
 
-    public FridgeItem(String name, int quantity) {
-        this.name = name;
-        this.quantity = quantity;
+        public FridgeItem(String name, int quantity) {
+            this.name = name;
+            this.quantity = quantity;
+        }
     }
-}

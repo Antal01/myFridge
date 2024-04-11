@@ -26,7 +26,6 @@ public class Member {
     private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fridge_id", referencedColumnName = "id")
+    @JoinColumn(name = "fridge_id")
     private Fridge fridge;
-
 }

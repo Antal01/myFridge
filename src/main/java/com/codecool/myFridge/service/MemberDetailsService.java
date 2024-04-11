@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class MemberDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public MemberDetailsService(UserRepository userRepository) {

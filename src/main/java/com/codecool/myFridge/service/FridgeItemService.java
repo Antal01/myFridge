@@ -9,15 +9,20 @@ import java.util.List;
 
 @Service
 public class FridgeItemService {
+
+    private final FridgeItemRepository repository;
+
     @Autowired
-    private FridgeItemRepository repository;
+    public FridgeItemService(FridgeItemRepository repository) {
+        this.repository = repository;
+    }
 
     public FridgeItem saveFridgeItem(FridgeItem fridgeItem) {
         return repository.save(fridgeItem);
     }
 
     public List<FridgeItem> saveFridgeItems(List<FridgeItem> fridgeItems) {
-       return repository.saveAll(fridgeItems);
+        return repository.saveAll(fridgeItems);
     }
 
     public List<FridgeItem> getFridgeItems() {
@@ -32,7 +37,7 @@ public class FridgeItemService {
         return repository.findByName(name);
     }
 
-    public String deleteFridgeItem(int id){
+    public String deleteFridgeItem(int id) {
         repository.deleteById(id);
         return "Item removed !" + id;
     }
@@ -40,6 +45,8 @@ public class FridgeItemService {
     public FridgeItem updateFridgeItem(FridgeItem fridgeItem) {
         FridgeItem existingItem = repository.findById(fridgeItem.getId()).orElse(null);
 
+
+        //használni az uj classt excepions
         if (existingItem != null) {
             existingItem.setName(fridgeItem.getName());
             existingItem.setQuantity(fridgeItem.getQuantity());
@@ -48,6 +55,7 @@ public class FridgeItemService {
             throw new RuntimeException("Item not found with id: " + fridgeItem.getId());
         }
     }
+
     public List<FridgeItem> getAllFridgeItems() {
         return repository.findAll();
     }
