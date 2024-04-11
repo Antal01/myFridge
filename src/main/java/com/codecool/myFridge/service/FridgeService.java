@@ -5,7 +5,6 @@ import com.codecool.myFridge.repository.FridgeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 
 @Service
 public class FridgeService {

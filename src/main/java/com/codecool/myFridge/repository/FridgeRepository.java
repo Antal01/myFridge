@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FridgeRepository extends JpaRepository<Fridge, Long> {
-    // Define custom methods if needed
 }

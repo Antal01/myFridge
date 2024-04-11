@@ -24,7 +24,6 @@
         @ManyToOne
         @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="fridge_id")
         @JsonIdentityReference(alwaysAsId=true)
-        //@JoinColumn(name = "fridge_id")
         private Fridge fridge;
 
         public FridgeItem(String name, int quantity) {

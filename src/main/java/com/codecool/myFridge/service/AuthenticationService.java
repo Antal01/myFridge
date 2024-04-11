@@ -22,16 +22,17 @@ public class AuthenticationService {
 
     private final UserRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private  final JwtService jwtService;
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final MemberDetailsService memberDetailsService;
     private final FridgeService fridgeService;
     public AuthenticationResponse register(RegisterRequest request) {
-
+//folosleges a for mivel egyedi neame van finde by name met
+        //Solution 3: @ControllerAdvice
         List<String> MemberNames=memberRepository.findAll().stream().map(member -> member.getName()).collect(Collectors.toList());
         for (String name:MemberNames){
             if(name.equals(request.getName())){
-                System.out.println(("Mar can ilyen Member"));
+               // System.out.println(("Mar van ilyen Member"));
                 return AuthenticationResponse.builder().token("fail").build();
             }
         }
@@ -47,6 +48,7 @@ public class AuthenticationService {
                 .build();
 
         memberRepository.save(user);
+
         var jwtToken = jwtService.generateToken(memberDetailsService.loadUserByUsername(user.getName()));
         return AuthenticationResponse.builder()
                 .token(jwtToken)

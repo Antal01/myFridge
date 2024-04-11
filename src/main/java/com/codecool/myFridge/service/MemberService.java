@@ -1,6 +1,5 @@
 package com.codecool.myFridge.service;
 
-import com.codecool.myFridge.model.Fridge;
 import com.codecool.myFridge.model.Member;
 import com.codecool.myFridge.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
