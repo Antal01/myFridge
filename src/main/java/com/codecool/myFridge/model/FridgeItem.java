@@ -26,6 +26,10 @@
         @JsonIdentityReference(alwaysAsId=true)
         private Fridge fridge;
 
+        @ManyToOne
+        @JoinColumn(name = "user_id")
+        private Member user;
+
         public FridgeItem(String name, int quantity) {
             this.name = name;
             this.quantity = quantity;

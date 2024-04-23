@@ -1,8 +1,12 @@
 package com.codecool.myFridge.controller;
 
 import com.codecool.myFridge.model.FridgeItem;
+import com.codecool.myFridge.model.Member;
 import com.codecool.myFridge.service.FridgeItemService;
+import com.codecool.myFridge.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,27 +16,33 @@ import java.util.List;
 @RestController
 public class FridgeItemController {
 
+    private final FridgeItemService service;
+    private final MemberService memberService;
+
     @Autowired
-    private FridgeItemService service;
-    @Autowired
-    public void setFridgeItemService(FridgeItemService service) {
+    public FridgeItemController(FridgeItemService service, MemberService memberService) {
         this.service = service;
+        this.memberService = memberService;
     }
 
-    @PostMapping("/fridgeItem")
-    public FridgeItem addFridgeItem(@RequestBody FridgeItem item) {
-        return service.saveFridgeItem(item);
-    }
+   @PostMapping("/fridgeItem")
+   public FridgeItem addFridgeItem(@RequestBody FridgeItem item) {
+       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       String loggedInUsername = authentication.getName();
+       Member loggedInUser = memberService.getUserFridgeId(loggedInUsername);
+       item.setUser(loggedInUser);
+       return service.saveFridgeItem(item);
+   }
 
     @PostMapping("/FridgeItems")
     public List<FridgeItem> addFridgeItems(@RequestBody List<FridgeItem> items) {
         return service.saveFridgeItems(items);
     }
 
-    @GetMapping("/fridgeItems")
-    public List<FridgeItem> findAllFridgeItems() {
-        return service.getFridgeItems();
-    }
+   @GetMapping("/fridgeItems")
+   public List<FridgeItem> findUserFridgeItems() {
+       return service.getFridgeItemsByLoggedInUser();
+   }
 
     @GetMapping("/fridgeItem/{id}")
     public FridgeItem findFridgeItemById(@PathVariable int id) {
