@@ -53,7 +53,7 @@ const OpenFridge = () => {
     const fetchAllFridgeItems = () => {
         const token = localStorage.getItem('token');
         axios
-            .get('/api/fridgeitems', {
+            .get('/api/fridgeItems', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -69,10 +69,9 @@ const OpenFridge = () => {
 
     const handleAddItem = () => {
         const token = localStorage.getItem('token');
-        console.log(member)
         axios
             .post(
-                '/api/addFridgeItem',
+                '/api/fridgeItem',
                 {
                     name: newItemName,
                     quantity: newItemQuantity,

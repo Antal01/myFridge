@@ -13,7 +13,7 @@ const Recipes = () => {
         const fetchFridgeItems = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('/api/fridgeitems', {
+                const response = await axios.get('/api/fridgeItems', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

@@ -10,7 +10,6 @@ import java.util.List;
 
 @RequestMapping("api")
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class FridgeItemController {
 
     @Autowired
@@ -19,29 +18,28 @@ public class FridgeItemController {
     public void setFridgeItemService(FridgeItemService service) {
         this.service = service;
     }
-//add folosleges post miatt
-    //elnevezeresek egysegese tetele
-    @PostMapping("/addFridgeItem")
+
+    @PostMapping("/fridgeItem")
     public FridgeItem addFridgeItem(@RequestBody FridgeItem item) {
         return service.saveFridgeItem(item);
     }
 
-    @PostMapping("/addFridgeItems")
+    @PostMapping("/FridgeItems")
     public List<FridgeItem> addFridgeItems(@RequestBody List<FridgeItem> items) {
         return service.saveFridgeItems(items);
     }
 
-    @GetMapping("/fridgeitems")
+    @GetMapping("/fridgeItems")
     public List<FridgeItem> findAllFridgeItems() {
         return service.getFridgeItems();
     }
 
-    @GetMapping("/fridgeitem/{id}")
+    @GetMapping("/fridgeItem/{id}")
     public FridgeItem findFridgeItemById(@PathVariable int id) {
         return service.getFridgeItemById(id);
     }
 
-    @GetMapping("/fridgeitem/byName/{name}")
+    @GetMapping("/fridgeItem/byName/{name}")
     public FridgeItem findFridgeItemByName(@PathVariable String name) {
         return service.getFridgeItemByName(name);
     }
