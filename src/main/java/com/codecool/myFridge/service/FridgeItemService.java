@@ -1,8 +1,11 @@
 package com.codecool.myFridge.service;
 
 import com.codecool.myFridge.model.FridgeItem;
+import com.codecool.myFridge.model.Member;
 import com.codecool.myFridge.repository.FridgeItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +14,12 @@ import java.util.List;
 public class FridgeItemService {
 
     private final FridgeItemRepository repository;
+    private final MemberService memberService;
 
     @Autowired
-    public FridgeItemService(FridgeItemRepository repository) {
+    public FridgeItemService(FridgeItemRepository repository, MemberService memberService) {
         this.repository = repository;
+        this.memberService = memberService;
     }
 
     public FridgeItem saveFridgeItem(FridgeItem fridgeItem) {
@@ -45,8 +50,6 @@ public class FridgeItemService {
     public FridgeItem updateFridgeItem(FridgeItem fridgeItem) {
         FridgeItem existingItem = repository.findById(fridgeItem.getId()).orElse(null);
 
-
-        //használni az uj classt excepions
         if (existingItem != null) {
             existingItem.setName(fridgeItem.getName());
             existingItem.setQuantity(fridgeItem.getQuantity());
@@ -58,5 +61,12 @@ public class FridgeItemService {
 
     public List<FridgeItem> getAllFridgeItems() {
         return repository.findAll();
+    }
+
+    public List<FridgeItem> getFridgeItemsByLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+        Member loggedInUser = memberService.getUserFridgeId(loggedInUsername);
+        return repository.findByUser(loggedInUser);
     }
 }

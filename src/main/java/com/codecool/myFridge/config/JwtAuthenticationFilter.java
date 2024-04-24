@@ -1,5 +1,4 @@
 package com.codecool.myFridge.config;
-import com.codecool.myFridge.dao.UserDao;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private  final JwtService jwtService;
     private final UserDetailsService userDetailsService;
-    private final UserDao memberDao;
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
