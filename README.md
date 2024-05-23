@@ -20,7 +20,8 @@ The ultimate goal of the app is to streamline the user's food search experience 
 * Spring  
 * PostgreSQL  
 * JavaScript  
-* React  
+* React
+* Angular   
 * Bootstrap  
 * Docker
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -37,18 +38,38 @@ The ultimate goal of the app is to streamline the user's food search experience 
    ```sh
    git clone https://github.com/Antal01/myFridge.git
    ```
-2. Navigate to the required directory:
-   ```sh
-   //
-   ```
- 3. Run command:
-    ```sh
-    docker-compose up 
-    ``` 
-4. Use the following port:
-   ```sh
-    http://localhost:5173/
-   ``` 
+2. Start the backend:   
+   2.1. Navigate to the required directory:
+      ```sh
+      src/main/java/com/codecool/myFridge/MyFridgeApplication.java   
+      ```
+   Run the MyFridgeApplication.java   
+ 3. Start the React Frontend:   
+    3.1. Navigate to the required directory:   
+       ```sh
+       cd frontend  
+       ```
+    3.2. Run command:   
+       ```sh
+       npm run dev   
+       ``` 
+    3.3. Use the following port:
+       ```sh
+       http://localhost:5174/
+       ```
+   4. Start the Angular Frontend:
+      4.1. Navigate to the required directory:   
+         ```sh
+          cd frontend-angular    
+         ```   
+       4.2. Run command:     
+         ```sh
+          npm start   
+         ```    
+       4.3. Use the following port:   
+         ```sh
+          http://localhost:4200/   
+         ```   
 <p align="right">(<a href="#readme-top">back to top</a>)</p> 
 
 ## Authors  
