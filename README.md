@@ -9,6 +9,8 @@ Not only does the app provide users with real-time information about what's in t
 The ultimate goal of the app is to streamline the user's food search experience and make meal planning more convenient.   
 
 ![image](https://github.com/Antal01/myFridge/assets/118159451/2cf06d42-5d3e-48fa-a924-fb193c129aee)  
+![image](https://github.com/Antal01/myFridge/assets/118159451/8679f583-4dc9-4333-a8f1-f3082542d3b0)   
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>  
 
