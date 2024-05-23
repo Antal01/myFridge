@@ -1,0 +1,23 @@
+<ngb-carousel #carousel [interval]="3000" (mouseenter)="togglePaused()" (mouseleave)="togglePaused()" class="carousel-container">
+  <ng-template ngbSlide>
+    <img src="assets/img4.jpg" class="d-block w-100 carousel-img" alt="1">
+    <div class="carousel-caption d-none d-md-block">
+      <h5>“People who love to eat are always the best people.”</h5>
+      <p>Julia Child</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img src="assets/img5.jpg" class="d-block w-100 carousel-img" alt="2">
+    <div class="carousel-caption d-none d-md-block">
+      <h5>“People who love to eat are always the best people.”</h5>
+      <p>Julia Child</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img src="assets/img6.jpg" class="d-block w-100 carousel-img" alt="3">
+    <div class="carousel-caption d-none d-md-block">
+      <h5>“People who love to eat are always the best people.”</h5>
+      <p>Julia Child</p>
+    </div>
+  </ng-template>
+</ngb-carousel>

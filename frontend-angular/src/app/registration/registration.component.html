@@ -1,0 +1,31 @@
+<div class="registration-container">
+<div class="registration-card">
+  <h1 class="registration-card-header">Registration</h1>
+  <div *ngIf="errorMessage">
+    {{ errorMessage }}
+    <button type="button" class="close" (click)="errorMessage=''">&times;</button>
+  </div>
+  <form [formGroup]="registrationForm" (ngSubmit)="handleRegistration()">
+    <div class="registration-form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" formControlName="username" required>
+    </div>
+    <div class="registration-form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" formControlName="email" required>
+    </div>
+    <div class="registration-form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" formControlName="password" required>
+    </div>
+    <div class="registration-form-group">
+      <label for="passwordConfirm">Confirm Password:</label>
+      <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm" required>
+    </div>
+    <button type="submit" class="registration-button">Register</button>
+  </form>
+  <p class="registration-link">
+    Already have an account? <a [routerLink]="['/login']">Log In</a>
+  </p>
+</div>
+</div>

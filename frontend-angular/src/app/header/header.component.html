@@ -1,0 +1,19 @@
+<nav>
+    <div class="left">
+        <a routerLink="/home">Home</a>
+        <ng-container *ngIf="authService.isLoggedIn() | async">
+            <a routerLink="/openfridge">What's Inside</a>
+            <a routerLink="/recipes">Recipes</a>
+        </ng-container>
+    </div>
+    <div class="right">
+        <ng-container *ngIf="authService.isLoggedIn() | async; else loggedOut">
+            <span>{{ authService.getUsername() | async }}</span>
+            <button class="logout-btn" (click)="logout()">Logout</button>
+        </ng-container>
+        <ng-template #loggedOut>
+            <a routerLink="/login">Login</a>
+            <a routerLink="/registration">Registration</a>
+        </ng-template>
+    </div>
+</nav>

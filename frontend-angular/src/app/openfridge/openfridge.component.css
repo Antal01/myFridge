@@ -1,0 +1,124 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #1C222A; 
+    padding-top: 10vh;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.card {
+    background: linear-gradient(135deg, #A142AB, #C75D93);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.item-card {
+    background: linear-gradient(135deg, #59338A, #252263);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .item-content p {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 1.2em;
+  }
+  
+  .item-content button {
+    background-color: #A142AB;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .item-content button:hover {
+    background-color: #C75D93; 
+  }
+  
+input[type="text"],
+input[type="number"] {
+  padding: 8px 12px; 
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none; 
+  border-color: #A142AB;
+}
+
+button[type="submit"] {
+  background-color: #A142AB; 
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #C75D93;
+}
+
+.update-item-card {
+    background: linear-gradient(135deg, #59338A, #252263);
+    border-radius: 8px;
+    margin-top: 10px; /* Adjust spacing from the item above */
+    padding: 10px;
+  }
+  
+  .update-item-card h3 {
+    color: #FFFFFF;
+  }
+  
+  .update-item-card label {
+    color: #FFFFFF;
+  }
+  
+  .update-item-card input[type="text"],
+  .update-item-card input[type="number"] {
+    width: 100%;
+    padding: 8px 12px; 
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .update-item-card button {
+    background-color: #A142AB;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .update-item-card button:hover {
+    background-color: #C75D93;
+  }
+  

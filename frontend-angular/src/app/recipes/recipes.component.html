@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="container mt-5 bg-dark-custom">
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-10 d-flex justify-content-center">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Enter ingredients..." [(ngModel)]="ingredients" (keydown.enter)="handleSearch(ingredients)">
+          <button class="btn btn-outline-secondary btn-custom ms-2" (click)="handleSearch(ingredients)">Search</button>
+          <div class="dropdown ms-2">
+            <button class="btn btn-outline-secondary btn-custom dropdown-toggle" type="button" id="sortMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort By
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="sortMenuButton">
+              <li><a class="dropdown-item" (click)="handleSort('usedIngredientCount-asc')">Used Ingredients (Asc)</a></li>
+              <li><a class="dropdown-item" (click)="handleSort('usedIngredientCount-desc')">Used Ingredients (Desc)</a></li>
+              <li><a class="dropdown-item" (click)="handleSort('missedIngredientCount-asc')">Missed Ingredients (Asc)</a></li>
+              <li><a class="dropdown-item" (click)="handleSort('missedIngredientCount-desc')">Missed Ingredients (Desc)</a></li>
+              <li><a class="dropdown-item" (click)="handleSort('likes-asc')">Likes (Asc)</a></li>
+              <li><a class="dropdown-item" (click)="handleSort('likes-desc')">Likes (Desc)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div *ngFor="let recipe of recipes" class="col-md-4 mb-4">
+        <div class="card card-custom">
+          <img class="card-img-top" [src]="recipe.image" [alt]="recipe.title">
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.title }}</h5>
+            <p class="card-text">
+              Used Ingredients: {{ recipe.usedIngredientCount }} <br>
+              Missed Ingredients: {{ recipe.missedIngredientCount }} <br>
+              Likes: {{ recipe.likes }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

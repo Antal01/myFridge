@@ -1,0 +1,38 @@
+<div class="card-container">
+  <div class="card">
+    <h2 class="card-header">My Items</h2>
+
+    <input type="text" placeholder="Search items..." [(ngModel)]="searchTerm" (input)="filterItems()">
+
+    <div *ngFor="let item of filteredFridgeItems" class="item-card">
+      <div class="item-content">
+        <p>{{ item.name }} - Quantity: {{ item.quantity }}</p>
+        <div *ngIf="selectedItemId !== item.id || !showUpdateField">
+          <button (click)="updateItem(item)">Update Item</button>
+        </div>
+        <button (click)="deleteFridgeItem(item.id)">Delete</button>
+      </div>
+
+      <div *ngIf="selectedItemId === item.id && showUpdateField" class="update-item-card">
+        <h3>Update Item</h3>
+        <label for="updatedItemName">New Name:</label>
+        <input type="text" id="updatedItemName" [(ngModel)]="updatedItemName" name="updatedItemName">
+        <label for="newItemQuantity">New Quantity:</label>
+        <input type="number" id="newItemQuantity" [(ngModel)]="newItemQuantity" name="newItemQuantity">
+        <div>
+          <button (click)="confirmUpdate()">Confirm Update</button>
+          <button (click)="cancelUpdate()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="card-header">Add New Item</h2>
+    <form (submit)="addFridgeItem()">
+      <label for="itemName">Name:</label>
+      <input type="text" id="itemName" [(ngModel)]="newItemName" name="itemName" required>
+      <label for="itemQuantity">Quantity:</label>
+      <input type="number" id="itemQuantity" [(ngModel)]="newItemQuantity" name="itemQuantity" required>
+      <button type="submit">Add Item</button>
+    </form>
+  </div>
+</div>

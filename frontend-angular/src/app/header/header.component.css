@@ -1,0 +1,56 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to right, #59338A, #252263);
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px; 
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+nav a:active {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+nav button {
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 0;
+}
+
+nav button:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+nav button:active {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+.left {
+    display: flex;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+}
+.right span {
+    color: black;
+    font-size: 18px; 
+    margin-right: 20px;
+    font-weight: bold;
+}
