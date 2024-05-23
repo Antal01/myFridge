@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import img4 from '../images/img4.jpg';
 import img5 from '../images/img5.jpg';
