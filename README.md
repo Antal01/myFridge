@@ -8,7 +8,11 @@ Not only does the app provide users with real-time information about what's in t
 
 The ultimate goal of the app is to streamline the user's food search experience and make meal planning more convenient.   
 
+The application has a Spring Boot backend and two frontends, one created with React and one created with Angular.
+
 ![image](https://github.com/Antal01/myFridge/assets/118159451/2cf06d42-5d3e-48fa-a924-fb193c129aee)  
+![image](https://github.com/Antal01/myFridge/assets/118159451/8679f583-4dc9-4333-a8f1-f3082542d3b0)   
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>  
 
@@ -18,7 +22,8 @@ The ultimate goal of the app is to streamline the user's food search experience 
 * Spring  
 * PostgreSQL  
 * JavaScript  
-* React  
+* React
+* Angular   
 * Bootstrap  
 * Docker
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -35,18 +40,38 @@ The ultimate goal of the app is to streamline the user's food search experience 
    ```sh
    git clone https://github.com/Antal01/myFridge.git
    ```
-2. Navigate to the required directory:
-   ```sh
-   //
-   ```
- 3. Run command:
-    ```sh
-    docker-compose up 
-    ``` 
-4. Use the following port:
-   ```sh
-    http://localhost:5173/
-   ``` 
+2. Start the backend:   
+   2.1. Navigate to the required directory:
+      ```sh
+      src/main/java/com/codecool/myFridge/MyFridgeApplication.java   
+      ```
+   Run the MyFridgeApplication.java   
+ 3. Start the React Frontend:   
+    3.1. Navigate to the required directory:   
+       ```sh
+       cd frontend  
+       ```
+    3.2. Run command:   
+       ```sh
+       npm run dev   
+       ``` 
+    3.3. Use the following port:
+       ```sh
+       http://localhost:5174/
+       ```
+   4. Start the Angular Frontend:
+      4.1. Navigate to the required directory:   
+         ```sh
+          cd frontend-angular    
+         ```   
+       4.2. Run command:     
+         ```sh
+          npm start   
+         ```    
+       4.3. Use the following port:   
+         ```sh
+          http://localhost:4200/   
+         ```   
 <p align="right">(<a href="#readme-top">back to top</a>)</p> 
 
 ## Authors  
