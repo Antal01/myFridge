@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { OpenFridgeComponent } from './openfridge.component';
 
-describe('OpenfridgeComponent', () => {
+describe('OpenFridgeComponent', () => {
   let component: OpenFridgeComponent;
   let fixture: ComponentFixture<OpenFridgeComponent>;
 
@@ -11,7 +10,7 @@ describe('OpenfridgeComponent', () => {
       declarations: [OpenFridgeComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(OpenFridgeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import {Component, ViewChild} from '@angular/core';
+import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 export class HomeComponent {
   paused = false;
 
-  @ViewChild('carousel', { static: true })
+  @ViewChild('carousel', {static: true})
   carousel!: NgbCarousel;
 
   togglePaused() {

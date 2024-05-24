@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {catchError} from 'rxjs/operators';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -35,21 +35,21 @@ export class LoginComponent {
       name: this.loginForm.value.username,
       password: this.loginForm.value.password
     })
-    .pipe(
-      catchError(error => {
-        console.error(error);
-        return error;
-      })
-    )
-.subscribe(response => {
-  if (response && response.error) {
-    this.errorMessage = 'Authentication failed. Please check your credentials.';
-  } else {
-    this.authService.login(response.token, this.loginForm.value.username);
-    localStorage.setItem('username', this.loginForm.value.username);
-    this.router.navigate(['/']);
-  }
-});
+      .pipe(
+        catchError(error => {
+          console.error(error);
+          return error;
+        })
+      )
+      .subscribe(response => {
+        if (response && response.error) {
+          this.errorMessage = 'Authentication failed. Please check your credentials.';
+        } else {
+          this.authService.login(response.token, this.loginForm.value.username);
+          localStorage.setItem('username', this.loginForm.value.username);
+          this.router.navigate(['/']);
+        }
+      });
 
   }
 }
